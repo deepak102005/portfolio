@@ -96,9 +96,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
               </h3>
             </div>
           </div>
-
-          {/* Live Button */}
-          <LiveProjectButton label="View Project" href="#" className="flex-shrink-0" />
         </div>
 
         {/* Center Grid: Left Description + Tech Tags, Right Mockup Image Grid */}
