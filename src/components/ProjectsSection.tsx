@@ -4,6 +4,11 @@ import FadeIn from './FadeIn';
 import ContactButton from './ContactButton';
 import LiveProjectButton from './LiveProjectButton';
 
+// Import realistic mockup images
+import powersaverMockup from '../../assets/powersaver_mockup.png';
+import stockPredictorMockup from '../../assets/stock_predictor_mockup.png';
+import voiceToCodeMockup from '../../assets/voice_to_code_mockup.png';
+
 interface Project {
   number: string;
   name: string;
@@ -12,6 +17,7 @@ interface Project {
   tech: string[];
   description: string;
   emoji: string;
+  image: string;
 }
 
 const PROJECTS: Project[] = [
@@ -23,6 +29,7 @@ const PROJECTS: Project[] = [
     tech: ['React.js', 'Node.js', 'MongoDB', 'AI Engine'],
     description: 'Gamified energy-saving platform for college students with real-time power monitoring, AI recommendations, coin rewards for milestones, streak tracking, and a competitive leaderboard dashboard.',
     emoji: '⚡',
+    image: powersaverMockup,
   },
   {
     number: '02',
@@ -32,6 +39,7 @@ const PROJECTS: Project[] = [
     tech: ['Python', 'LSTM', 'Gradio', 'scikit-learn'],
     description: 'Time-series forecasting pipeline using LSTM networks for financial trend prediction. Features custom feature engineering, scaling, ensemble evaluation metrics, and an interactive Gradio interface.',
     emoji: '📈',
+    image: stockPredictorMockup,
   },
   {
     number: '03',
@@ -41,6 +49,7 @@ const PROJECTS: Project[] = [
     tech: ['Python', 'NLP', 'Speech Recognition', 'AST'],
     description: 'Speech-to-text pipeline that converts natural language voice commands into executable Python scripts using NLP parsing. Modular architecture allows easy extensibility for new command types.',
     emoji: '🤖',
+    image: voiceToCodeMockup,
   },
 ];
 
@@ -98,7 +107,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
           </div>
         </div>
 
-        {/* Center Grid: Left Description + Tech Tags, Right Mockup Image Grid */}
+        {/* Center Grid: Left Description + Tech Tags, Right Mockup Image */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Left Column (5 cols): Description + Tags */}
@@ -125,68 +134,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
             </div>
           </div>
 
-          {/* Right Column (7 cols): Image Grid Mockup */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-10 gap-4 min-h-[200px] sm:min-h-[260px] md:min-h-[320px]">
-            
-            {/* Left 40% (4 cols on sm): Stacked panels */}
-            <div className="sm:col-span-4 flex flex-col gap-4">
-              {/* Panel 1 */}
-              <div
-                style={{
-                  borderColor: `${project.accent}30`,
-                  background: `linear-gradient(135deg, ${project.accent}08 0%, transparent 100%)`,
-                }}
-                className="flex-1 rounded-2xl sm:rounded-3xl border p-4 flex flex-col justify-between"
-              >
-                <div className="flex gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D7E2EA]/30"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D7E2EA]/30"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D7E2EA]/30"></span>
-                </div>
-                <span className="font-mono text-[10px] text-[#646973] uppercase tracking-wider block text-right">
-                  System.stats
-                </span>
-              </div>
-              
-              {/* Panel 2 */}
-              <div
-                style={{
-                  borderColor: `${project.accent}30`,
-                  background: `linear-gradient(135deg, ${project.accent}08 0%, transparent 100%)`,
-                }}
-                className="flex-1 rounded-2xl sm:rounded-3xl border p-4 flex items-center justify-between"
-              >
-                <span className="font-mono text-[10px] text-[#646973] uppercase tracking-wider">
-                  model_fit: OK
-                </span>
-                <span className="text-lg">✅</span>
-              </div>
-            </div>
-
-            {/* Right 60% (6 cols on sm): Tall panel with emoji & title */}
-            <div
+          {/* Right Column (7 cols): High-Fidelity Realistic Image Card */}
+          <div className="lg:col-span-7 w-full flex items-center justify-center">
+            <div 
               style={{
-                borderColor: `${project.accent}40`,
-                background: `linear-gradient(135deg, ${project.accent}15 0%, transparent 100%)`,
+                borderColor: `${project.accent}20`,
+                boxShadow: `0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px ${project.accent}08`,
               }}
-              className="sm:col-span-6 rounded-2xl sm:rounded-3xl border p-6 flex flex-col items-center justify-center text-center gap-3"
+              className="relative w-full aspect-[16/10] sm:aspect-[16/9.5] rounded-3xl overflow-hidden border bg-[#111827]/10 group/img transition-all duration-300"
             >
-              <div
-                style={{
-                  textShadow: `0 0 20px ${project.accent}50`,
-                }}
-                className="text-5xl sm:text-6xl md:text-7xl animate-bounce duration-1000"
-              >
-                {project.emoji}
-              </div>
-              <span className="font-mono text-[10px] sm:text-xs text-[#D7E2EA]/40 uppercase tracking-widest block">
-                Visualizing
-              </span>
-              <h4 className="text-lg sm:text-xl font-bold text-[#D7E2EA] uppercase tracking-tight">
-                {project.name}
-              </h4>
-            </div>
+              {/* Image itself */}
+              <img
+                src={project.image}
+                alt={`${project.name} Interface Mockup`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105"
+              />
 
+              {/* Accent-colored border line overlay on hover */}
+              <div 
+                style={{
+                  background: `linear-gradient(to top, ${project.accent}15, transparent)`,
+                }}
+                className="absolute inset-0 opacity-0 group-hover/img:opacity-100 transition-opacity duration-500 pointer-events-none"
+              />
+            </div>
           </div>
 
         </div>
@@ -194,6 +165,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
     </div>
   );
 };
+
+export default ProjectCard;
 
 export const ProjectsSection: React.FC = () => {
   return (
@@ -260,5 +233,3 @@ export const ProjectsSection: React.FC = () => {
     </section>
   );
 };
-
-export default ProjectsSection;
