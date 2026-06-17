@@ -166,8 +166,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
   );
 };
 
-export default ProjectCard;
-
 export const ProjectsSection: React.FC = () => {
   return (
     <section
@@ -233,3 +231,5 @@ export const ProjectsSection: React.FC = () => {
     </section>
   );
 };
+
+export default ProjectsSection;
